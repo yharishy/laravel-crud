@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Item;
 use Illuminate\Http\Request;
 use Session;
+use Datatables;
 
 class ItemController extends Controller
 {
@@ -46,15 +47,10 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    /*public function list()
+    public function list()
     {
-        $message = Session::get('message');
-        // Show item listing page
-        $items = Item::orderBy('created_at','desc')->paginate(2);
-
-        return view('items.list', compact('items', 'message'));
-    }*/
-
+        return view('items.list');
+    }
 
     /**
      * Display form to create item.
@@ -142,4 +138,27 @@ class ItemController extends Controller
         $item->delete();
         return redirect('admin/items')->with('message', 'Successfully Deleted');
     }
+
+
+    /**
+     * Show a list of all the items.
+     *
+     * @return Datatables JSON
+     */
+    public function data()
+    {   
+        
+        $items = Item::select('id', 'name', 'brand', 'amount', 'created_at', 'updated_at')->get();
+
+        return datatables()->of($items)
+            //->edit_column('id', '<input type="checkbox" value="">')
+            //->edit_column('status', '@if ($status=="-1") Not Confirmed @elseif ($status=="1") Active @else Inactive @endif')
+            /*->add_column('actions', '<a href="{{{ URL::to(\'admin/'.$cListingtype.'/\' . $id . \'/edit\' ) }}}" class="icon-1 info-tooltip" title="Edit"></a>
+                    <a href="{{{ URL::to(\'admin/'.$cListingtype.'/\' . $id . \'/delete\' ) }}}" onclick="return confirm(\'Are you sure do you want to delete this user? This will remove all user related data.\')" class="icon-6 info-tooltip" title="Delete"></a> 
+                    <a href="{{{ URL::to(\'admin/'.$cListingtype.'/\' . $id . \'/detail\' ) }}}" class="icon-5 info-tooltip" title="More Detail"></a>  
+                ')*/
+            //->add_column('actions', '')                      
+            //->remove_column('lastname')
+            ->make(true);
+    }      
 }

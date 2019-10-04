@@ -8,17 +8,12 @@
 		<!--  start page-heading -->
 		<nav aria-label="breadcrumb">
 		  <ol class="breadcrumb">
-		    <li class="breadcrumb-item active" aria-current="page">Items List <a href="/admin/items/create"><span class="badge badge-secondary">Add New</span></a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Items List 
+		    	<a href="/admin/items/create"><span class="badge badge-secondary">Add New</span></a>
+		    	<a href="/admin/itemlist"><span class="badge badge-secondary">Navigate to Search</span></a>
+		    </li>
 		  </ol>
-		</nav>		
-		<!-- end page-heading -->
-		<div class="input-group mb-3">
-		  <div class="input-group-prepend">
-		    <span class="input-group-text" id="inputGroup-sizing-default">Search</span>
-		  </div>
-		  <input name="name" type="text" class="form-control" id="exampleInput1" aria-describedby="emailHelp" placeholder="Enter name" value="{{old('name', isset($item) ? $item->name : null)}}" autocomplete="off">
-		</div>
-
+		</nav>
 
 
 		@if(@$message)						

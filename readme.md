@@ -5,6 +5,7 @@
 3. Run 'npm install' command
 4. Update the database detail in the .env file
 5. Run 'php artisan migrate' command
+6. If need dummy data, then run 'php artisan tinker' and 'factory(App\Item::class, 150)->create();' commands in terminal
 6. Load 'http://localhost:8000' url in the browser
 7. Register new account
 
