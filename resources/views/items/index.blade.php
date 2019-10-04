@@ -46,7 +46,10 @@
 			      <td>{{ $item->amount }}</td>
 			      <td>{{ $item->updated_at }}</td>
 			      <td>{{ $item->created_at }}</td>			      			      
-				  <td><a href="{{ URL::to('admin/items/' . $item->id . '/edit') }}" class="card-link">Edit</a><a href="{{ URL::to('admin/items/' . $item->id . '/delete') }}" class="card-link">Delete</a></td>
+				  <td>
+				  	<a href="{{ URL::to('admin/items/' . $item->id . '/edit') }}" class="card-link">Edit</a>
+				  	<a href="{{ URL::to('admin/items/' . $item->id . '/delete') }}" class="card-link" onclick="return confirm('Are you sure to delete this item?');">Delete</a>
+				  </td>
 			    </tr>	        
 		    @endforeach		    	
 		  </tbody>

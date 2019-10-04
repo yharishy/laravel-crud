@@ -17,6 +17,16 @@
 			<div class="alert alert-success" role="alert">{{{ $message }}}</div>
 		@endif
 
+		@if ($errors->any())
+		    <div class="alert alert-danger">
+		        <ul>
+		            @foreach ($errors->all() as $error)
+		                <li>{{ $error }}</li>
+		            @endforeach
+		        </ul>
+		    </div>
+		@endif		
+
 		<form method="post" action="@if (isset($item)){{ URL::to('admin/items/' . $item->id . '/edit') }}@endif" autocomplete="off">
 			<div class="form-group">
 			<label for="exampleInput1">Name</label>

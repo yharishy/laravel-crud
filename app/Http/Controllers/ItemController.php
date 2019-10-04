@@ -18,6 +18,14 @@ class ItemController extends Controller
         $this->middleware('auth');
     }
 
+    public function attributes()
+    {
+        return [
+            'amount' => 'price',
+        ];
+    }
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -31,6 +39,22 @@ class ItemController extends Controller
 
         return view('items.index', compact('items', 'message'));
     }
+
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    /*public function list()
+    {
+        $message = Session::get('message');
+        // Show item listing page
+        $items = Item::orderBy('created_at','desc')->paginate(2);
+
+        return view('items.list', compact('items', 'message'));
+    }*/
+
 
     /**
      * Display form to create item.
@@ -50,6 +74,14 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'detail' => 'required',
+            'brand' => 'required',            
+            'amount' => 'required|max:5',            
+        ]);
+
         $item = new Item ();
         $item->name = $request->name;
         $item->detail = $request->detail;
@@ -81,6 +113,14 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',            
+            'detail' => 'required',
+            'brand' => 'required',            
+            'amount' => 'required|max:5',            
+        ]);
+
         $item = Item::find($id);
         $item->name = $request->name;
         $item->detail = $request->detail;
